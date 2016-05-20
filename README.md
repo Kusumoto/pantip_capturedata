@@ -13,10 +13,10 @@ npm start
 ```
 
 ### Docker Install
-Comming soon.
+Coming soon.
 
 ### Documentation
-Comming soon.
+Coming soon.
 
 ### More information and contact to developer
 * [Website :: https://kusumotolab.com](https://kusumotolab.com)
