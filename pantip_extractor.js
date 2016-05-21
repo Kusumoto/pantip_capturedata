@@ -198,7 +198,7 @@ exports.getComment = function(options_params, callback) {
         'page': options_params.page,
         'parent': options_params.parent
     }
-    console.log(pantipURL + '/forum/topic/render_comments?' + showObject(options));
+
     request({
         url: pantipURL + '/forum/topic/render_comments?' + showObject(options),
         method: 'GET',
