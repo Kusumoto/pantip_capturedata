@@ -1,21 +1,11 @@
 'use strict';
 
 var request = require('request'),
-    cheerio = require('cheerio');
+    cheerio = require('cheerio'),
+    object2qstr = require('./object2querystring');
 
 const pantipURL = 'http://pantip.com'
 var jar = request.jar();
-
-function showObject(obj) {
-  var result = "";
-  for (var p in obj) {
-    if( obj.hasOwnProperty(p) && obj[p] != null) {
-      result += p + "=" + obj[p] + "&";
-    }
-  }
-  return result;
-}
-
 
 exports.getPantipCategory = function(callback) {
     let category = [];
@@ -62,9 +52,9 @@ exports.getHitsTopic = function(link, callback) {
         let $ = cheerio.load(body)
         $('div.best-item div.post-item-title a').each(function(i, elem) {
             hitsTopic.push({
-                id: $(this).prop('href').split('/topic/')[1],
-                title: $(this).text(),
-                link: $(this).prop('href'),
+                _id: $(this).prop('href').split('/topic/')[1],
+                topic_id: $(this).prop('href').split('/topic/')[1],
+                disp_topic: $(this).text()
             })
         })
         callback(null, hitsTopic)
@@ -74,6 +64,8 @@ exports.getHitsTopic = function(link, callback) {
 exports.getPantipTrend = function(link, page, callback) {
     let trendTopic = [];
     let roomTagName = link.split('/forum/')[1];
+    if (roomTagName == null)
+        roomTagName = 'all'
 
     request({
         url: pantipURL + '/forum/topic/ajax_room_pantip_trend?p=' + page + '&r=' + roomTagName,
@@ -87,7 +79,7 @@ exports.getPantipTrend = function(link, page, callback) {
         if (err)
             callback(err)
 
-        callback(null, body)
+        callback(null, JSON.parse(body))
     });
 }
 
@@ -115,7 +107,7 @@ exports.getTopicList = function(options, callback) {
         if (err)
             callback(err)
 
-        callback(null, body)
+        callback(null, JSON.parse(body))
     })
 }
 
@@ -200,7 +192,7 @@ exports.getComment = function(options_params, callback) {
     }
 
     request({
-        url: pantipURL + '/forum/topic/render_comments?' + showObject(options),
+        url: pantipURL + '/forum/topic/render_comments?' + object2qstr.showObject(options),
         method: 'GET',
         jar: jar,
         headers: {
@@ -211,6 +203,6 @@ exports.getComment = function(options_params, callback) {
         if (err)
             callback(err)
 
-        callback(null, body)
+        callback(null, JSON.parse(body))
     });
 }
