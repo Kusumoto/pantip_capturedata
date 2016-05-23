@@ -13,7 +13,9 @@ npm start
 ```
 
 ### Docker Install
-Coming soon.
+```
+docker run --name pantip-api -p 8080:8080 -d kusumoto/pantip_capturedata
+```
 
 ### Documentation
 https://kusumotolab.com/pantip_capturedata-documentation-and-api-reference/
