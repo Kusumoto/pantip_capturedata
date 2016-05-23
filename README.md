@@ -16,7 +16,7 @@ npm start
 Coming soon.
 
 ### Documentation
-Coming soon.
+https://kusumotolab.com/pantip_capturedata-documentation-and-api-reference/
 
 ### More information and contact to developer
 * [Website :: https://kusumotolab.com](https://kusumotolab.com)
