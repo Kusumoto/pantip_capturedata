@@ -1,4 +1,4 @@
 #!/bin/bash
 
-cd /app/samf-webservice/src
+cd /app/pantip-ws/
 export TZ='Asia/Bangkok'
