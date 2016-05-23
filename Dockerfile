@@ -7,7 +7,7 @@ WORKDIR /app/pantip-ws
 
 RUN npm install
 
-COPY docker-entrypoint.sh /app/samf-webservice/entrypoint.sh
+COPY docker-entrypoint.sh /app/pantip-ws/entrypoint.sh
 
 RUN chmod 777 entrypoint.sh
 
